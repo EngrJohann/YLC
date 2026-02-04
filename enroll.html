@@ -472,8 +472,8 @@
         <p>&copy; 2026 Young Learning Center Nuvali. Where Little Minds Grow Big Dreams! 🌈</p>
     </footer>
 
-    <script>
-const scriptURL = "https://script.google.com/macros/s/AKfycbx3YDgIEhGFIORft1gX7q8PvXjAayeVkFhY8t-5XOMiLBboK1D-nIxmKSBxT-dnDwuM/exec";
+   <script>
+const scriptURL = "https://script.google.com/macros/s/AKfycbxBRz5y-oyz1vYBwKUEbArxfnHPJeWocOvXAhn1dSCO1r4HkvvnGC_qamHFbRhViMvM/exec";
 
 document.getElementById('enrollmentForm').addEventListener('submit', function(e) {
     e.preventDefault();
@@ -486,18 +486,21 @@ document.getElementById('enrollmentForm').addEventListener('submit', function(e)
     });
 
     fetch(scriptURL, {
-        method: 'POST',
-        body: JSON.stringify(data)
+        method: "POST",
+        body: JSON.stringify(data),
+        headers: {
+            "Content-Type": "application/json"
+        }
     })
-    .then(response => response.json())
-    .then(result => {
+    .then(res => res.json())
+    .then(() => {
         document.getElementById('successMessage').classList.add('show');
         document.getElementById('successMessage').scrollIntoView({ behavior: 'smooth' });
         this.reset();
     })
-    .catch(error => {
-        alert("Submission failed. Please try again.");
-        console.error("Error:", error);
+    .catch(err => {
+        console.error("Submit error:", err);
+        alert("Submission failed — open Console (F12) and tell me the error.");
     });
 });
 </script>
