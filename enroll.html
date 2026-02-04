@@ -473,7 +473,7 @@
     </footer>
 
    <script>
-const scriptURL = "https://script.google.com/macros/s/AKfycbxBRz5y-oyz1vYBwKUEbArxfnHPJeWocOvXAhn1dSCO1r4HkvvnGC_qamHFbRhViMvM/exec";
+const scriptURL = "https://script.google.com/macros/s/AKfycbzBq-UEIgDXzzF8RS0_gYIA3SkbBoMHzEpXmS2imddiGL40OOILAEjdekzMNc6vGQux/exec";
 
 document.getElementById('enrollmentForm').addEventListener('submit', function(e) {
     e.preventDefault();
@@ -497,10 +497,11 @@ document.getElementById('enrollmentForm').addEventListener('submit', function(e)
         document.getElementById('successMessage').classList.add('show');
         document.getElementById('successMessage').scrollIntoView({ behavior: 'smooth' });
         this.reset();
+        alert("Application submitted successfully! Check your email and the Google Sheet.");
     })
     .catch(err => {
         console.error("Submit error:", err);
-        alert("Submission failed — open Console (F12) and tell me the error.");
+        alert("Submission failed — check console for errors.");
     });
 });
 </script>
