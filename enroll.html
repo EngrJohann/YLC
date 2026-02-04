@@ -472,31 +472,32 @@
         <p>&copy; 2026 Young Learning Center Nuvali. Where Little Minds Grow Big Dreams! 🌈</p>
     </footer>
 
-   <script>
-const scriptURL = "https://script.google.com/macros/s/AKfycbzBq-UEIgDXzzF8RS0_gYIA3SkbBoMHzEpXmS2imddiGL40OOILAEjdekzMNc6vGQux/exec";
+  <script>
+const scriptURL = "https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec"; // <- Replace with your Apps Script URL
 
 document.getElementById('enrollmentForm').addEventListener('submit', function(e) {
     e.preventDefault();
 
     const formData = new FormData(this);
     const data = {};
-
-    formData.forEach((value, key) => {
-        data[key] = value;
-    });
+    formData.forEach((value, key) => { data[key] = value; });
 
     fetch(scriptURL, {
         method: "POST",
         body: JSON.stringify(data),
-        headers: {
-            "Content-Type": "application/json"
-        }
+        headers: { "Content-Type": "application/json" }
     })
-    .then(res => res.json())
+    .then(response => response.json())
     .then(() => {
-        document.getElementById('successMessage').classList.add('show');
-        document.getElementById('successMessage').scrollIntoView({ behavior: 'smooth' });
+        // Show success message
+        const success = document.getElementById('successMessage');
+        success.classList.add('show');
+        success.scrollIntoView({ behavior: 'smooth' });
+
+        // Reset form
         this.reset();
+
+        // Optional: alert
         alert("Application submitted successfully! Check your email and the Google Sheet.");
     })
     .catch(err => {
