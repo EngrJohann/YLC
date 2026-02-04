@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Young Learning Center Nuvali - Where Little Minds Grow Big Dreams</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-red: #E85C5C;
+            --primary-blue: #4A90B8;
+            --primary-green: #3D9F5C;
+            --primary-yellow: #F5B93C;
+            --cream: #F5EFE0;
+            --text-dark: #2C3E50;
+            --white: #FFFFFF;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Nunito', sans-serif;
+            color: var(--text-dark);
+            overflow-x: hidden;
+            background: var(--cream);
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: var(--white);
+            padding: 1rem 3rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            text-decoration: none;
+        }
+
+        .logo img {
+            height: 60px;
+            width: auto;
+        }
+
+        .logo-text {
+            font-family: 'Fredoka', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--primary-blue);
+        }
+
+        .nav-tabs {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-tabs a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: color 0.3s;
+            position: relative;
+            padding: 0.5rem 0;
+        }
+
+        .nav-tabs a:hover,
+        .nav-tabs a.active {
+            color: var(--primary-red);
+        }
+
+        .nav-tabs a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: var(--primary-red);
+            transition: width 0.3s;
+            border-radius: 2px;
+        }
+
+        .nav-tabs a:hover::after,
+        .nav-tabs a.active::after {
+            width: 100%;
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-top: 100px;
+            min-height: calc(100vh - 100px);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        /* Hero Text */
+        .hero-text {
+            text-align: center;
+            margin-bottom: 3rem;
+            animation: fadeInDown 1s;
+        }
+
+        .hero-text h1 {
+            font-family: 'Fredoka', sans-serif;
+            font-size: 4rem;
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .hero-text p {
+            font-size: 2rem;
+            color: var(--primary-red);
+            font-weight: 600;
+            font-style: italic;
+        }
+
+        /* Slideshow Container */
+        .slideshow-container {
+            max-width: 900px;
+            width: 100%;
+            position: relative;
+            margin: 2rem auto;
+            border-radius: 30px;
+            overflow: hidden;
+            box-shadow: 0 15px 50px rgba(0,0,0,0.2);
+        }
+
+        .slide {
+            display: none;
+            width: 100%;
+            height: 500px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            animation: fadeIn 1s;
+        }
+
+        .slide.active {
+            display: block;
+        }
+
+        /* Placeholder slides with colorful gradients and text */
+        .slide-1 {
+            background: linear-gradient(135deg, var(--primary-yellow), var(--primary-red));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Fredoka', sans-serif;
+            font-size: 3rem;
+            color: var(--white);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .slide-2 {
+            background: linear-gradient(135deg, var(--primary-blue), var(--primary-green));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Fredoka', sans-serif;
+            font-size: 3rem;
+            color: var(--white);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .slide-3 {
+            background: linear-gradient(135deg, var(--primary-green), var(--primary-yellow));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Fredoka', sans-serif;
+            font-size: 3rem;
+            color: var(--white);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .slide-4 {
+            background: linear-gradient(135deg, var(--primary-red), var(--primary-blue));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Fredoka', sans-serif;
+            font-size: 3rem;
+            color: var(--white);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        /* Navigation Arrows */
+        .prev, .next {
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 50px;
+            height: 50px;
+            background: rgba(255,255,255,0.9);
+            color: var(--primary-blue);
+            font-weight: bold;
+            font-size: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.3s;
+            z-index: 10;
+        }
+
+        .prev:hover, .next:hover {
+            background: var(--primary-red);
+            color: var(--white);
+        }
+
+        .prev {
+            left: 20px;
+        }
+
+        .next {
+            right: 20px;
+        }
+
+        /* Dots */
+        .dots-container {
+            text-align: center;
+            margin-top: 1.5rem;
+        }
+
+        .dot {
+            cursor: pointer;
+            height: 15px;
+            width: 15px;
+            margin: 0 5px;
+            background-color: #bbb;
+            border-radius: 50%;
+            display: inline-block;
+            transition: background-color 0.3s;
+        }
+
+        .dot.active,
+        .dot:hover {
+            background-color: var(--primary-red);
+        }
+
+        /* Enroll Button */
+        .enroll-button {
+            display: inline-block;
+            margin-top: 3rem;
+            padding: 1.5rem 4rem;
+            background: var(--primary-red);
+            color: var(--white);
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.5rem;
+            font-family: 'Fredoka', sans-serif;
+            box-shadow: 0 10px 30px rgba(232, 92, 92, 0.4);
+            transition: transform 0.3s, box-shadow 0.3s;
+            animation: pulse 2s infinite;
+        }
+
+        .enroll-button:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 15px 40px rgba(232, 92, 92, 0.6);
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        /* Footer */
+        footer {
+            background: var(--text-dark);
+            color: var(--white);
+            text-align: center;
+            padding: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            nav {
+                padding: 1rem;
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .nav-tabs {
+                gap: 1rem;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .nav-tabs a {
+                font-size: 0.9rem;
+            }
+
+            .hero-text h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-text p {
+                font-size: 1.3rem;
+            }
+
+            .slideshow-container {
+                height: 350px;
+            }
+
+            .slide {
+                height: 350px;
+            }
+
+            .slide-1, .slide-2, .slide-3, .slide-4 {
+                font-size: 1.8rem;
+            }
+
+            .enroll-button {
+                font-size: 1.2rem;
+                padding: 1.2rem 2.5rem;
+            }
+
+            .logo-text {
+                font-size: 1rem;
+            }
+
+            .logo img {
+                height: 45px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <a href="index.html" class="logo">
+            <img src="YLC_Logo_Final.jpg" alt="Young Learning Center Logo">
+            <span class="logo-text">Young Learning Center Nuvali</span>
+        </a>
+        <ul class="nav-tabs">
+            <li><a href="index.html" class="active">Home</a></li>
+            <li><a href="programs.html">Programs Offered</a></li>
+            <li><a href="faculty.html">Meet the Faculty</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+        </ul>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Hero Text -->
+        <div class="hero-text">
+            <h1>Young Learning Center Nuvali</h1>
+            <p>"Where Little Minds Grow Big Dreams!"</p>
+        </div>
+
+        <!-- Slideshow -->
+        <div class="slideshow-container">
+            <div class="slide slide-1 active">
+                🎨 Creative Learning
+            </div>
+            <div class="slide slide-2">
+                📚 Reading Adventures
+            </div>
+            <div class="slide slide-3">
+                🎪 Fun & Play
+            </div>
+            <div class="slide slide-4">
+                🌟 Growing Together
+            </div>
+
+            <!-- Navigation arrows -->
+            <a class="prev" onclick="changeSlide(-1)">❮</a>
+            <a class="next" onclick="changeSlide(1)">❯</a>
+        </div>
+
+        <!-- Dots -->
+        <div class="dots-container">
+            <span class="dot active" onclick="currentSlide(1)"></span>
+            <span class="dot" onclick="currentSlide(2)"></span>
+            <span class="dot" onclick="currentSlide(3)"></span>
+            <span class="dot" onclick="currentSlide(4)"></span>
+        </div>
+
+        <!-- Enroll Button -->
+        <a href="enroll.html" class="enroll-button">Enroll Now! 🎓</a>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 Young Learning Center Nuvali. Where Little Minds Grow Big Dreams! 🌈</p>
+    </footer>
+
+    <script>
+        let slideIndex = 1;
+        let slideTimer;
+
+        // Show initial slide
+        showSlides(slideIndex);
+
+        // Auto-advance slides every 4 seconds
+        function autoSlides() {
+            changeSlide(1);
+            slideTimer = setTimeout(autoSlides, 4000);
+        }
+
+        // Start auto-advance
+        autoSlides();
+
+        // Next/previous controls
+        function changeSlide(n) {
+            clearTimeout(slideTimer);
+            showSlides(slideIndex += n);
+            slideTimer = setTimeout(autoSlides, 4000);
+        }
+
+        // Dot controls
+        function currentSlide(n) {
+            clearTimeout(slideTimer);
+            showSlides(slideIndex = n);
+            slideTimer = setTimeout(autoSlides, 4000);
+        }
+
+        function showSlides(n) {
+            let slides = document.getElementsByClassName("slide");
+            let dots = document.getElementsByClassName("dot");
+            
+            if (n > slides.length) { slideIndex = 1 }
+            if (n < 1) { slideIndex = slides.length }
+            
+            for (let i = 0; i < slides.length; i++) {
+                slides[i].classList.remove("active");
+            }
+            
+            for (let i = 0; i < dots.length; i++) {
+                dots[i].classList.remove("active");
+            }
+            
+            slides[slideIndex - 1].classList.add("active");
+            dots[slideIndex - 1].classList.add("active");
+        }
+    </script>
+</body>
+</html>

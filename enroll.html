@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enrollment Application - Young Learning Center Nuvali</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-red: #E85C5C;
+            --primary-blue: #4A90B8;
+            --primary-green: #3D9F5C;
+            --primary-yellow: #F5B93C;
+            --cream: #F5EFE0;
+            --text-dark: #2C3E50;
+            --white: #FFFFFF;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Nunito', sans-serif;
+            color: var(--text-dark);
+            background: var(--cream);
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: var(--white);
+            padding: 1rem 3rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            text-decoration: none;
+        }
+
+        .logo img {
+            height: 60px;
+            width: auto;
+        }
+
+        .logo-text {
+            font-family: 'Fredoka', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--primary-blue);
+        }
+
+        .nav-tabs {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-tabs a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: color 0.3s;
+            position: relative;
+            padding: 0.5rem 0;
+        }
+
+        .nav-tabs a:hover {
+            color: var(--primary-red);
+        }
+
+        .nav-tabs a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: var(--primary-red);
+            transition: width 0.3s;
+            border-radius: 2px;
+        }
+
+        .nav-tabs a:hover::after {
+            width: 100%;
+        }
+
+        /* Main Content */
+        .enrollment-container {
+            margin-top: 120px;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 3rem 2rem;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .page-header h1 {
+            font-family: 'Fredoka', sans-serif;
+            font-size: 3rem;
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+        }
+
+        .page-header p {
+            font-size: 1.2rem;
+            color: var(--primary-red);
+        }
+
+        /* Form Styles */
+        .enrollment-form {
+            background: var(--white);
+            padding: 3rem;
+            border-radius: 30px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+
+        .form-section {
+            margin-bottom: 2.5rem;
+        }
+
+        .form-section h2 {
+            font-family: 'Fredoka', sans-serif;
+            color: var(--primary-blue);
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid var(--primary-yellow);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text-dark);
+        }
+
+        .form-group label .required {
+            color: var(--primary-red);
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 15px;
+            font-family: 'Nunito', sans-serif;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary-blue);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .checkbox-group input[type="checkbox"] {
+            width: auto;
+            cursor: pointer;
+        }
+
+        /* Submit Button */
+        .submit-button {
+            width: 100%;
+            padding: 1.5rem;
+            background: var(--primary-red);
+            color: var(--white);
+            border: none;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.3rem;
+            font-family: 'Fredoka', sans-serif;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 8px 25px rgba(232, 92, 92, 0.4);
+            margin-top: 2rem;
+        }
+
+        .submit-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(232, 92, 92, 0.6);
+        }
+
+        /* Success Message */
+        .success-message {
+            display: none;
+            background: var(--primary-green);
+            color: var(--white);
+            padding: 2rem;
+            border-radius: 20px;
+            text-align: center;
+            margin-top: 2rem;
+            font-size: 1.2rem;
+            animation: fadeIn 0.5s;
+        }
+
+        .success-message.show {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Footer */
+        footer {
+            background: var(--text-dark);
+            color: var(--white);
+            text-align: center;
+            padding: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            nav {
+                padding: 1rem;
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .nav-tabs {
+                gap: 1rem;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .nav-tabs a {
+                font-size: 0.9rem;
+            }
+
+            .logo-text {
+                font-size: 1rem;
+            }
+
+            .logo img {
+                height: 45px;
+            }
+
+            .page-header h1 {
+                font-size: 2rem;
+            }
+
+            .enrollment-form {
+                padding: 2rem 1.5rem;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <a href="index.html" class="logo">
+            <img src="YLC_Logo_Final.jpg" alt="Young Learning Center Logo">
+            <span class="logo-text">Young Learning Center Nuvali</span>
+        </a>
+        <ul class="nav-tabs">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="programs.html">Programs Offered</a></li>
+            <li><a href="faculty.html">Meet the Faculty</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+        </ul>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="enrollment-container">
+        <div class="page-header">
+            <h1>Enrollment Application</h1>
+            <p>Begin your child's learning journey with us! 🌟</p>
+        </div>
+
+        <form class="enrollment-form" id="enrollmentForm">
+            <!-- Student Information -->
+            <div class="form-section">
+                <h2>Student Information</h2>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>First Name <span class="required">*</span></label>
+                        <input type="text" name="studentFirstName" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Last Name <span class="required">*</span></label>
+                        <input type="text" name="studentLastName" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Date of Birth <span class="required">*</span></label>
+                        <input type="date" name="dateOfBirth" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Gender <span class="required">*</span></label>
+                        <select name="gender" required>
+                            <option value="">Select Gender</option>
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Home Address <span class="required">*</span></label>
+                    <textarea name="address" rows="3" required></textarea>
+                </div>
+            </div>
+
+            <!-- Program Selection -->
+            <div class="form-section">
+                <h2>Program Selection</h2>
+                <div class="form-group">
+                    <label>Select Program <span class="required">*</span></label>
+                    <select name="program" required>
+                        <option value="">Choose a Program</option>
+                        <option value="toddler">Toddler Program (Ages 2-3)</option>
+                        <option value="nursery">Nursery Program (Ages 3-4)</option>
+                        <option value="kinder">Kinder Program (Ages 4-6)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Preferred Start Date <span class="required">*</span></label>
+                    <input type="date" name="startDate" required>
+                </div>
+            </div>
+
+            <!-- Parent/Guardian Information -->
+            <div class="form-section">
+                <h2>Parent/Guardian Information</h2>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Mother's Full Name <span class="required">*</span></label>
+                        <input type="text" name="motherName" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Mother's Contact Number <span class="required">*</span></label>
+                        <input type="tel" name="motherPhone" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Father's Full Name <span class="required">*</span></label>
+                        <input type="text" name="fatherName" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Father's Contact Number <span class="required">*</span></label>
+                        <input type="tel" name="fatherPhone" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Email Address <span class="required">*</span></label>
+                    <input type="email" name="email" required>
+                </div>
+            </div>
+
+            <!-- Emergency Contact -->
+            <div class="form-section">
+                <h2>Emergency Contact</h2>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Contact Person Name <span class="required">*</span></label>
+                        <input type="text" name="emergencyName" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Relationship <span class="required">*</span></label>
+                        <input type="text" name="emergencyRelation" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Contact Number <span class="required">*</span></label>
+                    <input type="tel" name="emergencyPhone" required>
+                </div>
+            </div>
+
+            <!-- Medical Information -->
+            <div class="form-section">
+                <h2>Medical Information</h2>
+                <div class="form-group">
+                    <label>Does your child have any allergies?</label>
+                    <textarea name="allergies" rows="2" placeholder="Please list any allergies or write 'None'"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Does your child have any medical conditions we should know about?</label>
+                    <textarea name="medicalConditions" rows="2" placeholder="Please list any conditions or write 'None'"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Pediatrician Name and Contact</label>
+                    <input type="text" name="pediatrician">
+                </div>
+            </div>
+
+            <!-- Additional Information -->
+            <div class="form-section">
+                <h2>Additional Information</h2>
+                <div class="form-group">
+                    <label>How did you hear about us?</label>
+                    <select name="referralSource">
+                        <option value="">Select an option</option>
+                        <option value="friend">Friend/Family Referral</option>
+                        <option value="online">Online Search</option>
+                        <option value="social">Social Media</option>
+                        <option value="flyer">Flyer/Advertisement</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Additional Comments or Questions</label>
+                    <textarea name="comments" rows="4" placeholder="Feel free to share any additional information..."></textarea>
+                </div>
+            </div>
+
+            <!-- Agreement -->
+            <div class="form-section">
+                <div class="checkbox-group">
+                    <input type="checkbox" id="agreement" name="agreement" required>
+                    <label for="agreement">
+                        I confirm that all information provided is accurate and I have read the enrollment requirements. <span class="required">*</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit" class="submit-button">Submit Application 📝</button>
+
+            <!-- Success Message -->
+            <div class="success-message" id="successMessage">
+                ✓ Application submitted successfully! We will contact you within 2-3 business days.
+            </div>
+        </form>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 Young Learning Center Nuvali. Where Little Minds Grow Big Dreams! 🌈</p>
+    </footer>
+
+    <script>
+        document.getElementById('enrollmentForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Collect form data
+            const formData = new FormData(this);
+            const data = {};
+            
+            formData.forEach((value, key) => {
+                data[key] = value;
+            });
+            
+            // Log to console (you can see this in browser's developer tools)
+            console.log('Enrollment Application Data:', data);
+            
+            // In a real application, you would send this data to your server
+            // For example: fetch('/api/enrollment', { method: 'POST', body: JSON.stringify(data) })
+            
+            // Show success message
+            document.getElementById('successMessage').classList.add('show');
+            
+            // Scroll to success message
+            document.getElementById('successMessage').scrollIntoView({ behavior: 'smooth' });
+            
+            // Optional: Reset form after submission
+            // this.reset();
+            
+            // You can also save to localStorage for testing
+            localStorage.setItem('enrollmentData_' + Date.now(), JSON.stringify(data));
+            alert('Application submitted! Check browser console (F12) to see the captured data.');
+        });
+    </script>
+</body>
+</html>

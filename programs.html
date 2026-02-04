@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Programs Offered - Young Learning Center Nuvali</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-red: #E85C5C;
+            --primary-blue: #4A90B8;
+            --primary-green: #3D9F5C;
+            --primary-yellow: #F5B93C;
+            --cream: #F5EFE0;
+            --text-dark: #2C3E50;
+            --white: #FFFFFF;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Nunito', sans-serif;
+            color: var(--text-dark);
+            background: var(--cream);
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: var(--white);
+            padding: 1rem 3rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            text-decoration: none;
+        }
+
+        .logo img {
+            height: 60px;
+            width: auto;
+        }
+
+        .logo-text {
+            font-family: 'Fredoka', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--primary-blue);
+        }
+
+        .nav-tabs {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-tabs a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: color 0.3s;
+            position: relative;
+            padding: 0.5rem 0;
+        }
+
+        .nav-tabs a:hover,
+        .nav-tabs a.active {
+            color: var(--primary-red);
+        }
+
+        .nav-tabs a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: var(--primary-red);
+            transition: width 0.3s;
+            border-radius: 2px;
+        }
+
+        .nav-tabs a:hover::after,
+        .nav-tabs a.active::after {
+            width: 100%;
+        }
+
+        /* Main Content */
+        .programs-container {
+            margin-top: 120px;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 3rem 2rem;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .page-header h1 {
+            font-family: 'Fredoka', sans-serif;
+            font-size: 3.5rem;
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+        }
+
+        .page-header p {
+            font-size: 1.3rem;
+            color: var(--text-dark);
+        }
+
+        /* Program Cards */
+        .programs-grid {
+            display: grid;
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .program-card {
+            background: var(--white);
+            border-radius: 30px;
+            padding: 3rem;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .program-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .program-header {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .program-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+        }
+
+        .program-card:nth-child(1) .program-icon {
+            background: linear-gradient(135deg, var(--primary-yellow), var(--primary-red));
+        }
+
+        .program-card:nth-child(2) .program-icon {
+            background: linear-gradient(135deg, var(--primary-blue), var(--primary-green));
+        }
+
+        .program-card:nth-child(3) .program-icon {
+            background: linear-gradient(135deg, var(--primary-green), var(--primary-yellow));
+        }
+
+        .program-title h2 {
+            font-family: 'Fredoka', sans-serif;
+            font-size: 2.2rem;
+            color: var(--primary-blue);
+            margin-bottom: 0.5rem;
+        }
+
+        .program-age {
+            font-size: 1.1rem;
+            color: var(--primary-red);
+            font-weight: 600;
+        }
+
+        .program-description {
+            font-size: 1.15rem;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+            color: var(--text-dark);
+        }
+
+        .program-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .feature-item {
+            padding: 1rem;
+            background: var(--cream);
+            border-radius: 15px;
+            border-left: 4px solid var(--primary-green);
+        }
+
+        .feature-item::before {
+            content: '✓';
+            color: var(--primary-green);
+            font-weight: bold;
+            margin-right: 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        .schedule-info {
+            background: var(--cream);
+            padding: 1.5rem;
+            border-radius: 15px;
+            margin-top: 1.5rem;
+        }
+
+        .schedule-info h3 {
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+            font-family: 'Fredoka', sans-serif;
+        }
+
+        .schedule-info p {
+            margin-bottom: 0.5rem;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            text-align: center;
+            background: linear-gradient(135deg, var(--primary-blue), var(--primary-green));
+            padding: 4rem 2rem;
+            border-radius: 30px;
+            color: var(--white);
+            margin-top: 4rem;
+        }
+
+        .cta-section h2 {
+            font-family: 'Fredoka', sans-serif;
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .cta-section p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+
+        .enroll-button {
+            display: inline-block;
+            padding: 1.5rem 3.5rem;
+            background: var(--primary-red);
+            color: var(--white);
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.3rem;
+            font-family: 'Fredoka', sans-serif;
+            box-shadow: 0 8px 25px rgba(232, 92, 92, 0.4);
+            transition: transform 0.3s;
+        }
+
+        .enroll-button:hover {
+            transform: translateY(-5px);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--text-dark);
+            color: var(--white);
+            text-align: center;
+            padding: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            nav {
+                padding: 1rem;
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .nav-tabs {
+                gap: 1rem;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .nav-tabs a {
+                font-size: 0.9rem;
+            }
+
+            .logo-text {
+                font-size: 1rem;
+            }
+
+            .logo img {
+                height: 45px;
+            }
+
+            .page-header h1 {
+                font-size: 2.5rem;
+            }
+
+            .program-card {
+                padding: 2rem;
+            }
+
+            .program-header {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .program-title h2 {
+                font-size: 1.8rem;
+            }
+
+            .program-features {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <a href="index.html" class="logo">
+            <img src="YLC_Logo_Final.jpg" alt="Young Learning Center Logo">
+            <span class="logo-text">Young Learning Center Nuvali</span>
+        </a>
+        <ul class="nav-tabs">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="programs.html" class="active">Programs Offered</a></li>
+            <li><a href="faculty.html">Meet the Faculty</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+        </ul>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="programs-container">
+        <div class="page-header">
+            <h1>Our Programs</h1>
+            <p>Tailored learning experiences for every stage of early childhood development</p>
+        </div>
+
+        <div class="programs-grid">
+            <!-- Toddler Program -->
+            <div class="program-card">
+                <div class="program-header">
+                    <div class="program-icon">🐣</div>
+                    <div class="program-title">
+                        <h2>Toddler Program</h2>
+                        <p class="program-age">Ages 2-3 Years</p>
+                    </div>
+                </div>
+                <p class="program-description">
+                    Our Toddler Program provides a gentle and nurturing introduction to preschool life. We focus on building confidence, developing social skills, and encouraging exploration through age-appropriate play and activities.
+                </p>
+                <div class="program-features">
+                    <div class="feature-item">Sensory play activities</div>
+                    <div class="feature-item">Early socialization skills</div>
+                    <div class="feature-item">Motor skills development</div>
+                    <div class="feature-item">Music and movement</div>
+                    <div class="feature-item">Story time sessions</div>
+                    <div class="feature-item">Creative art activities</div>
+                </div>
+                <div class="schedule-info">
+                    <h3>Schedule & Details</h3>
+                    <p><strong>Class Hours:</strong> 8:00 AM - 11:00 AM or 1:00 PM - 4:00 PM</p>
+                    <p><strong>Class Size:</strong> Maximum 12 students per class</p>
+                    <p><strong>Teacher Ratio:</strong> 1:6 (One teacher for every 6 students)</p>
+                </div>
+            </div>
+
+            <!-- Nursery Program -->
+            <div class="program-card">
+                <div class="program-header">
+                    <div class="program-icon">🌱</div>
+                    <div class="program-title">
+                        <h2>Nursery Program</h2>
+                        <p class="program-age">Ages 3-4 Years</p>
+                    </div>
+                </div>
+                <p class="program-description">
+                    The Nursery Program builds on foundational skills with more structured learning activities. Children develop independence, enhance communication skills, and begin exploring early literacy and numeracy concepts.
+                </p>
+                <div class="program-features">
+                    <div class="feature-item">Early literacy introduction</div>
+                    <div class="feature-item">Basic numeracy skills</div>
+                    <div class="feature-item">Creative expression through art</div>
+                    <div class="feature-item">Cooperative play activities</div>
+                    <div class="feature-item">Nature and science exploration</div>
+                    <div class="feature-item">Physical education</div>
+                </div>
+                <div class="schedule-info">
+                    <h3>Schedule & Details</h3>
+                    <p><strong>Class Hours:</strong> 8:00 AM - 12:00 PM or 1:00 PM - 5:00 PM</p>
+                    <p><strong>Class Size:</strong> Maximum 15 students per class</p>
+                    <p><strong>Teacher Ratio:</strong> 1:8 (One teacher for every 8 students)</p>
+                </div>
+            </div>
+
+            <!-- Kinder Program -->
+            <div class="program-card">
+                <div class="program-header">
+                    <div class="program-icon">🎓</div>
+                    <div class="program-title">
+                        <h2>Kinder Program</h2>
+                        <p class="program-age">Ages 4-6 Years</p>
+                    </div>
+                </div>
+                <p class="program-description">
+                    Our comprehensive Kinder Program prepares children for elementary school success. With a focus on academic readiness, critical thinking, and social-emotional development, students build the skills and confidence needed for their educational journey.
+                </p>
+                <div class="program-features">
+                    <div class="feature-item">Reading and writing skills</div>
+                    <div class="feature-item">Math and problem-solving</div>
+                    <div class="feature-item">Science experiments</div>
+                    <div class="feature-item">Social studies introduction</div>
+                    <div class="feature-item">Character development</div>
+                    <div class="feature-item">School readiness preparation</div>
+                </div>
+                <div class="schedule-info">
+                    <h3>Schedule & Details</h3>
+                    <p><strong>Class Hours:</strong> 8:00 AM - 1:00 PM (Full Day Program)</p>
+                    <p><strong>Class Size:</strong> Maximum 18 students per class</p>
+                    <p><strong>Teacher Ratio:</strong> 1:10 (One teacher for every 10 students)</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- CTA Section -->
+        <div class="cta-section">
+            <h2>Ready to Enroll Your Child?</h2>
+            <p>Join our learning community and give your child the best start in their educational journey!</p>
+            <a href="enroll.html" class="enroll-button">Apply Now! 🌟</a>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 Young Learning Center Nuvali. Where Little Minds Grow Big Dreams! 🌈</p>
+    </footer>
+</body>
+</html>
