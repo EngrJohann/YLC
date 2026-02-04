@@ -473,36 +473,33 @@
     </footer>
 
     <script>
-        document.getElementById('enrollmentForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Collect form data
-            const formData = new FormData(this);
-            const data = {};
-            
-            formData.forEach((value, key) => {
-                data[key] = value;
-            });
-            
-            // Log to console (you can see this in browser's developer tools)
-            console.log('Enrollment Application Data:', data);
-            
-            // In a real application, you would send this data to your server
-            // For example: fetch('/api/enrollment', { method: 'POST', body: JSON.stringify(data) })
-            
-            // Show success message
-            document.getElementById('successMessage').classList.add('show');
-            
-            // Scroll to success message
-            document.getElementById('successMessage').scrollIntoView({ behavior: 'smooth' });
-            
-            // Optional: Reset form after submission
-            // this.reset();
-            
-            // You can also save to localStorage for testing
-            localStorage.setItem('enrollmentData_' + Date.now(), JSON.stringify(data));
-            alert('Application submitted! Check browser console (F12) to see the captured data.');
-        });
-    </script>
+const scriptURL = "https://script.google.com/macros/s/AKfycbx3YDgIEhGFIORft1gX7q8PvXjAayeVkFhY8t-5XOMiLBboK1D-nIxmKSBxT-dnDwuM/exec";
+
+document.getElementById('enrollmentForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    const formData = new FormData(this);
+    const data = {};
+
+    formData.forEach((value, key) => {
+        data[key] = value;
+    });
+
+    fetch(scriptURL, {
+        method: 'POST',
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(result => {
+        document.getElementById('successMessage').classList.add('show');
+        document.getElementById('successMessage').scrollIntoView({ behavior: 'smooth' });
+        this.reset();
+    })
+    .catch(error => {
+        alert("Submission failed. Please try again.");
+        console.error("Error:", error);
+    });
+});
+</script>
 </body>
 </html>
