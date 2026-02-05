@@ -474,13 +474,13 @@
 
     <script>
         // REPLACE THIS URL WITH YOUR GOOGLE APPS SCRIPT WEB APP URL
-        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbz7_LHeNv9qsgCx9FxAjvbUkRDh3FiQ_1G9e7SzqpAQh8cCi8AWFz5BtZH43fEW7lz9/exec';
+        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbznpo1427ZKYVFw73mNby-WvFJfWrnvtfJoUVvjr-Im925yzkOblnva-KrSCIeSZVIB/exec';
         
         document.getElementById('enrollmentForm').addEventListener('submit', function(e) {
             e.preventDefault();
             
             // Check if script URL is configured
-            if (SCRIPT_URL === 'https://script.google.com/macros/s/AKfycbz7_LHeNv9qsgCx9FxAjvbUkRDh3FiQ_1G9e7SzqpAQh8cCi8AWFz5BtZH43fEW7lz9/exec') {
+            if (SCRIPT_URL === 'https://script.google.com/macros/s/AKfycbznpo1427ZKYVFw73mNby-WvFJfWrnvtfJoUVvjr-Im925yzkOblnva-KrSCIeSZVIB/exec') {
                 alert('⚠️ Google Apps Script URL not configured yet!\n\nPlease follow the setup instructions to:\n1. Create a Google Sheet\n2. Add the Apps Script code\n3. Deploy as web app\n4. Replace SCRIPT_URL in this file');
                 return;
             }
