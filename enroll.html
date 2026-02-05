@@ -472,39 +472,55 @@
         <p>&copy; 2026 Young Learning Center Nuvali. Where Little Minds Grow Big Dreams! 🌈</p>
     </footer>
 
-  <script>
-const scriptURL = "https://script.google.com/macros/s/AKfycbwS_QN2MLkLrP9OZAa-NF3fQhkKNfRZa62mApjzZztJfrN0pInqupYdNh2kvzM4sG4A/exec"; // <- Replace with your Apps Script URL
-
-document.getElementById('enrollmentForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-
-    const formData = new FormData(this);
-    const data = {};
-    formData.forEach((value, key) => { data[key] = value; });
-
-    fetch(scriptURL, {
-        method: "POST",
-        body: JSON.stringify(data),
-        headers: { "Content-Type": "application/json" }
-    })
-    .then(response => response.json())
-    .then(() => {
-        // Show success message
-        const success = document.getElementById('successMessage');
-        success.classList.add('show');
-        success.scrollIntoView({ behavior: 'smooth' });
-
-        // Reset form
-        this.reset();
-
-        // Optional: alert
-        alert("Application submitted successfully! Check your email and the Google Sheet.");
-    })
-    .catch(err => {
-        console.error("Submit error:", err);
-        alert("Submission failed — check console for errors.");
-    });
-});
-</script>
+    <script>
+        // REPLACE THIS URL WITH YOUR GOOGLE APPS SCRIPT WEB APP URL
+        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxck8QPkkGgFKhg8xqfBWCSgVxWOXuN2pg0OunMCScLvWKxGi7ZhCrk-933HVEPrpQ/exec';
+        
+        document.getElementById('enrollmentForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Disable submit button to prevent double submission
+            const submitButton = this.querySelector('.submit-button');
+            const originalButtonText = submitButton.textContent;
+            submitButton.disabled = true;
+            submitButton.textContent = 'Submitting... ⏳';
+            
+            // Collect form data
+            const formData = new FormData(this);
+            
+            // Send to Google Sheets
+            fetch(SCRIPT_URL, {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.result === 'success') {
+                    // Show success message
+                    document.getElementById('successMessage').classList.add('show');
+                    
+                    // Scroll to success message
+                    document.getElementById('successMessage').scrollIntoView({ behavior: 'smooth' });
+                    
+                    // Reset form
+                    this.reset();
+                    
+                    // Re-enable button
+                    submitButton.disabled = false;
+                    submitButton.textContent = originalButtonText;
+                } else {
+                    throw new Error('Submission failed');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('There was an error submitting your application. Please try again or contact us directly.');
+                
+                // Re-enable button
+                submitButton.disabled = false;
+                submitButton.textContent = originalButtonText;
+            });
+        });
+    </script>
 </body>
 </html>
